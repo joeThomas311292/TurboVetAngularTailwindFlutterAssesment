@@ -1,1 +1,13 @@
+# macOS
 .DS_Store
+
+# Node
+node_modules/
+
+# Angular
+.angular/
+dist/
+
+# Flutter
+.build/
+.dart_tool/
