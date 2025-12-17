@@ -1,0 +1,41 @@
+<div class="space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-semibold">Knowledgebase Editor</h1>
+
+    <div class="flex items-center gap-2">
+      <button
+        class="px-3 py-2 border rounded-lg text-sm hover:bg-white"
+        (click)="splitPreview = !splitPreview"
+      >
+        {{ splitPreview ? 'Edit only' : 'Split preview' }}
+      </button>
+
+      <button
+        class="px-4 py-2 rounded-lg bg-slate-900 text-white text-sm hover:bg-slate-800"
+        (click)="onSave()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+
+  <div class="grid gap-4" [class.md:grid-cols-2]="splitPreview">
+    <textarea
+      class="border rounded-xl p-3 w-full h-80 font-mono text-sm bg-white"
+      [(ngModel)]="content"
+      placeholder="Write internal docs here..."
+    ></textarea>
+
+    @if (splitPreview) {
+      <div class="border rounded-xl p-4 bg-white overflow-auto h-80">
+        <div class="text-sm font-semibold mb-2">Preview</div>
+
+        <div class="space-y-1 text-sm">
+          @for (line of lines; track $index) {
+            <div class="whitespace-pre-wrap">{{ line }}</div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

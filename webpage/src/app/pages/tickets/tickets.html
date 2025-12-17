@@ -1,0 +1,50 @@
+<div class="space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-semibold">Ticket Viewer</h1>
+
+    <select
+      class="border rounded-lg px-3 py-2"
+      [(ngModel)]="selectedStatus"
+    >
+      @for (s of statuses; track s) {
+        <option [value]="s">{{ s }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="overflow-x-auto bg-white rounded-xl shadow">
+    <table class="min-w-full text-sm">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-4 py-2 text-left">ID</th>
+          <th class="px-4 py-2 text-left">Subject</th>
+          <th class="px-4 py-2 text-left">Status</th>
+          <th class="px-4 py-2 text-left">Created</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (ticket of filteredTickets; track ticket.id) {
+          <tr class="border-t">
+            <td class="px-4 py-2">{{ ticket.id }}</td>
+            <td class="px-4 py-2">{{ ticket.subject }}</td>
+            <td class="px-4 py-2">
+              <span
+                class="px-2 py-1 rounded-full text-xs"
+                [class.bg-green-100]="ticket.status === 'Open'"
+                [class.text-green-800]="ticket.status === 'Open'"
+                [class.bg-yellow-100]="ticket.status === 'In Progress'"
+                [class.text-yellow-800]="ticket.status === 'In Progress'"
+                [class.bg-gray-200]="ticket.status === 'Closed'"
+                [class.text-gray-700]="ticket.status === 'Closed'"
+              >
+                {{ ticket.status }}
+              </span>
+            </td>
+            <td class="px-4 py-2">{{ ticket.createdAt }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
